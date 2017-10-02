@@ -19,14 +19,22 @@ import (
 	"math"
 )
 
-func Sqrt(x float64) float64 {
+type ErrNegativeSqrt float64
+
+func (e ErrNegativeSqrt) Error() string {
+	return fmt.Sprintf("cannot Sqrt nagative number: %v", float64(e))
+}
+
+func Sqrt(x float64) (float64, error) {
+	if x < 0 {
+		return x, ErrNegativeSqrt(x)
+	}
 	z := float64(1)
-	p := 0.0;
 	for i := 1; i < 10; i++  {
 		z -= (z * z - x) / (2 * z)
 		fmt.Println("z = ", z)
 	}
-	return z
+	return z, nil
 }
 
 func main() {
@@ -34,4 +42,11 @@ func main() {
 		fmt.Println(Sqrt(float64(i)))
 		fmt.Println(math.Sqrt(float64(i)))
 	}
+
+	v, err := Sqrt(-1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(v)
 }
