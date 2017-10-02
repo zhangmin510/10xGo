@@ -40,7 +40,7 @@ const (
 	Big = 1 << 100
 )
 
-func Basic() {
+func main() {
 	fmt.Printf("Type: %T Value: %v\n", Name, Name)
 
 	fmt.Println(add(rand.Intn(10), rand.Intn(10)))
@@ -51,7 +51,7 @@ func Basic() {
 	fmt.Println(k);
 
 	a, b := swap(h, w)
-    fmt.Println(a, b)
+	fmt.Println(a, b)
 
 	fmt.Println(split(sum))
 }
